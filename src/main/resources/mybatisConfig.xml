@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "mybatis-3-config" "mybatis-3-config.dtd" >
+<configuration>
+	<!-- 使用驼峰命名规范 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<!-- 别名 -->
+	<typeAliases>
+		<package name="com.zhiyuan.frank.pojo" />
+	</typeAliases>
+
+	<plugins>
+	<!-- 该分页插件需放在typeAliases的后面 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+			<property name="reasonable" value="true" />
+		</plugin>
+	</plugins>
+</configuration>

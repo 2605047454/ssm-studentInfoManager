@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.SbadbehaviorMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Sbadbehavior">
+    <id column="sb_id" jdbcType="INTEGER" property="sbId" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="sb_descript" jdbcType="VARCHAR" property="sbDescript" />
+    <result column="sb_ Approval" jdbcType="VARCHAR" property="sbApproval" />
+    <result column="sb_appendtime" jdbcType="VARCHAR" property="sbAppendtime" />
+    <result column="sb_result" jdbcType="VARCHAR" property="sbResult" />
+    <result column="sb_ accessory" jdbcType="VARCHAR" property="sbAccessory" />
+    <result column="sb_recordtime" jdbcType="VARCHAR" property="sbRecordtime" />
+    <result column="sb_lasttime" jdbcType="VARCHAR" property="sbLasttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sb_id, s_number, sb_descript, "sb_ Approval", sb_appendtime, sb_result, "sb_ accessory", 
+    sb_recordtime, sb_lasttime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.SbadbehaviorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_badbehavior
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_badbehavior
+    where sb_id = #{sbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_badbehavior
+    where sb_id = #{sbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.SbadbehaviorExample">
+    delete from s_badbehavior
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Sbadbehavior">
+    insert into s_badbehavior (sb_id, s_number, sb_descript, 
+      "sb_ Approval", sb_appendtime, sb_result, 
+      "sb_ accessory", sb_recordtime, sb_lasttime
+      )
+    values (#{sbId,jdbcType=INTEGER}, #{sNumber,jdbcType=INTEGER}, #{sbDescript,jdbcType=VARCHAR}, 
+      #{sbApproval,jdbcType=VARCHAR}, #{sbAppendtime,jdbcType=VARCHAR}, #{sbResult,jdbcType=VARCHAR}, 
+      #{sbAccessory,jdbcType=VARCHAR}, #{sbRecordtime,jdbcType=VARCHAR}, #{sbLasttime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Sbadbehavior">
+    insert into s_badbehavior
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sbId != null">
+        sb_id,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="sbDescript != null">
+        sb_descript,
+      </if>
+      <if test="sbApproval != null">
+        "sb_ Approval",
+      </if>
+      <if test="sbAppendtime != null">
+        sb_appendtime,
+      </if>
+      <if test="sbResult != null">
+        sb_result,
+      </if>
+      <if test="sbAccessory != null">
+        "sb_ accessory",
+      </if>
+      <if test="sbRecordtime != null">
+        sb_recordtime,
+      </if>
+      <if test="sbLasttime != null">
+        sb_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sbId != null">
+        #{sbId,jdbcType=INTEGER},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sbDescript != null">
+        #{sbDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="sbApproval != null">
+        #{sbApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="sbAppendtime != null">
+        #{sbAppendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="sbResult != null">
+        #{sbResult,jdbcType=VARCHAR},
+      </if>
+      <if test="sbAccessory != null">
+        #{sbAccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="sbRecordtime != null">
+        #{sbRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="sbLasttime != null">
+        #{sbLasttime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.SbadbehaviorExample" resultType="java.lang.Long">
+    select count(*) from s_badbehavior
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_badbehavior
+    <set>
+      <if test="record.sbId != null">
+        sb_id = #{record.sbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sNumber != null">
+        s_number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.sbDescript != null">
+        sb_descript = #{record.sbDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbApproval != null">
+        "sb_ Approval" = #{record.sbApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbAppendtime != null">
+        sb_appendtime = #{record.sbAppendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbResult != null">
+        sb_result = #{record.sbResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbAccessory != null">
+        "sb_ accessory" = #{record.sbAccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbRecordtime != null">
+        sb_recordtime = #{record.sbRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbLasttime != null">
+        sb_lasttime = #{record.sbLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_badbehavior
+    set sb_id = #{record.sbId,jdbcType=INTEGER},
+      s_number = #{record.sNumber,jdbcType=INTEGER},
+      sb_descript = #{record.sbDescript,jdbcType=VARCHAR},
+      "sb_ Approval" = #{record.sbApproval,jdbcType=VARCHAR},
+      sb_appendtime = #{record.sbAppendtime,jdbcType=VARCHAR},
+      sb_result = #{record.sbResult,jdbcType=VARCHAR},
+      "sb_ accessory" = #{record.sbAccessory,jdbcType=VARCHAR},
+      sb_recordtime = #{record.sbRecordtime,jdbcType=VARCHAR},
+      sb_lasttime = #{record.sbLasttime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Sbadbehavior">
+    update s_badbehavior
+    <set>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sbDescript != null">
+        sb_descript = #{sbDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="sbApproval != null">
+        "sb_ Approval" = #{sbApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="sbAppendtime != null">
+        sb_appendtime = #{sbAppendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="sbResult != null">
+        sb_result = #{sbResult,jdbcType=VARCHAR},
+      </if>
+      <if test="sbAccessory != null">
+        "sb_ accessory" = #{sbAccessory,jdbcType=VARCHAR},
+      </if>
+      <if test="sbRecordtime != null">
+        sb_recordtime = #{sbRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="sbLasttime != null">
+        sb_lasttime = #{sbLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sb_id = #{sbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Sbadbehavior">
+    update s_badbehavior
+    set s_number = #{sNumber,jdbcType=INTEGER},
+      sb_descript = #{sbDescript,jdbcType=VARCHAR},
+      "sb_ Approval" = #{sbApproval,jdbcType=VARCHAR},
+      sb_appendtime = #{sbAppendtime,jdbcType=VARCHAR},
+      sb_result = #{sbResult,jdbcType=VARCHAR},
+      "sb_ accessory" = #{sbAccessory,jdbcType=VARCHAR},
+      sb_recordtime = #{sbRecordtime,jdbcType=VARCHAR},
+      sb_lasttime = #{sbLasttime,jdbcType=VARCHAR}
+    where sb_id = #{sbId,jdbcType=INTEGER}
+  </update>
+</mapper>

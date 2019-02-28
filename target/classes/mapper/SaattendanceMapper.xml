@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.SaattendanceMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Saattendance">
+    <id column="sa_id" jdbcType="INTEGER" property="saId" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="sa_late" jdbcType="INTEGER" property="saLate" />
+    <result column="sa_truant" jdbcType="INTEGER" property="saTruant" />
+    <result column="sa_leave" jdbcType="INTEGER" property="saLeave" />
+    <result column="sa_skipclass" jdbcType="INTEGER" property="saSkipclass" />
+    <result column="sa_work" jdbcType="INTEGER" property="saWork" />
+    <result column="sa_recordtime" jdbcType="VARCHAR" property="saRecordtime" />
+    <result column="sa_lasttime" jdbcType="VARCHAR" property="saLasttime" />
+    <result column="sa_grade" jdbcType="INTEGER" property="saGrade" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sa_id, s_number, sa_late, sa_truant, sa_leave, sa_skipclass, sa_work, sa_recordtime, 
+    sa_lasttime, sa_grade
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.SaattendanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_aattendance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_aattendance
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_aattendance
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.SaattendanceExample">
+    delete from s_aattendance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Saattendance">
+    insert into s_aattendance (sa_id, s_number, sa_late, 
+      sa_truant, sa_leave, sa_skipclass, 
+      sa_work, sa_recordtime, sa_lasttime, 
+      sa_grade)
+    values (#{saId,jdbcType=INTEGER}, #{sNumber,jdbcType=INTEGER}, #{saLate,jdbcType=INTEGER}, 
+      #{saTruant,jdbcType=INTEGER}, #{saLeave,jdbcType=INTEGER}, #{saSkipclass,jdbcType=INTEGER}, 
+      #{saWork,jdbcType=INTEGER}, #{saRecordtime,jdbcType=VARCHAR}, #{saLasttime,jdbcType=VARCHAR}, 
+      #{saGrade,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Saattendance">
+    insert into s_aattendance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="saId != null">
+        sa_id,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="saLate != null">
+        sa_late,
+      </if>
+      <if test="saTruant != null">
+        sa_truant,
+      </if>
+      <if test="saLeave != null">
+        sa_leave,
+      </if>
+      <if test="saSkipclass != null">
+        sa_skipclass,
+      </if>
+      <if test="saWork != null">
+        sa_work,
+      </if>
+      <if test="saRecordtime != null">
+        sa_recordtime,
+      </if>
+      <if test="saLasttime != null">
+        sa_lasttime,
+      </if>
+      <if test="saGrade != null">
+        sa_grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="saId != null">
+        #{saId,jdbcType=INTEGER},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="saLate != null">
+        #{saLate,jdbcType=INTEGER},
+      </if>
+      <if test="saTruant != null">
+        #{saTruant,jdbcType=INTEGER},
+      </if>
+      <if test="saLeave != null">
+        #{saLeave,jdbcType=INTEGER},
+      </if>
+      <if test="saSkipclass != null">
+        #{saSkipclass,jdbcType=INTEGER},
+      </if>
+      <if test="saWork != null">
+        #{saWork,jdbcType=INTEGER},
+      </if>
+      <if test="saRecordtime != null">
+        #{saRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="saLasttime != null">
+        #{saLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="saGrade != null">
+        #{saGrade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.SaattendanceExample" resultType="java.lang.Long">
+    select count(*) from s_aattendance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_aattendance
+    <set>
+      <if test="record.saId != null">
+        sa_id = #{record.saId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sNumber != null">
+        s_number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.saLate != null">
+        sa_late = #{record.saLate,jdbcType=INTEGER},
+      </if>
+      <if test="record.saTruant != null">
+        sa_truant = #{record.saTruant,jdbcType=INTEGER},
+      </if>
+      <if test="record.saLeave != null">
+        sa_leave = #{record.saLeave,jdbcType=INTEGER},
+      </if>
+      <if test="record.saSkipclass != null">
+        sa_skipclass = #{record.saSkipclass,jdbcType=INTEGER},
+      </if>
+      <if test="record.saWork != null">
+        sa_work = #{record.saWork,jdbcType=INTEGER},
+      </if>
+      <if test="record.saRecordtime != null">
+        sa_recordtime = #{record.saRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saLasttime != null">
+        sa_lasttime = #{record.saLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saGrade != null">
+        sa_grade = #{record.saGrade,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_aattendance
+    set sa_id = #{record.saId,jdbcType=INTEGER},
+      s_number = #{record.sNumber,jdbcType=INTEGER},
+      sa_late = #{record.saLate,jdbcType=INTEGER},
+      sa_truant = #{record.saTruant,jdbcType=INTEGER},
+      sa_leave = #{record.saLeave,jdbcType=INTEGER},
+      sa_skipclass = #{record.saSkipclass,jdbcType=INTEGER},
+      sa_work = #{record.saWork,jdbcType=INTEGER},
+      sa_recordtime = #{record.saRecordtime,jdbcType=VARCHAR},
+      sa_lasttime = #{record.saLasttime,jdbcType=VARCHAR},
+      sa_grade = #{record.saGrade,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Saattendance">
+    update s_aattendance
+    <set>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="saLate != null">
+        sa_late = #{saLate,jdbcType=INTEGER},
+      </if>
+      <if test="saTruant != null">
+        sa_truant = #{saTruant,jdbcType=INTEGER},
+      </if>
+      <if test="saLeave != null">
+        sa_leave = #{saLeave,jdbcType=INTEGER},
+      </if>
+      <if test="saSkipclass != null">
+        sa_skipclass = #{saSkipclass,jdbcType=INTEGER},
+      </if>
+      <if test="saWork != null">
+        sa_work = #{saWork,jdbcType=INTEGER},
+      </if>
+      <if test="saRecordtime != null">
+        sa_recordtime = #{saRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="saLasttime != null">
+        sa_lasttime = #{saLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="saGrade != null">
+        sa_grade = #{saGrade,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Saattendance">
+    update s_aattendance
+    set s_number = #{sNumber,jdbcType=INTEGER},
+      sa_late = #{saLate,jdbcType=INTEGER},
+      sa_truant = #{saTruant,jdbcType=INTEGER},
+      sa_leave = #{saLeave,jdbcType=INTEGER},
+      sa_skipclass = #{saSkipclass,jdbcType=INTEGER},
+      sa_work = #{saWork,jdbcType=INTEGER},
+      sa_recordtime = #{saRecordtime,jdbcType=VARCHAR},
+      sa_lasttime = #{saLasttime,jdbcType=VARCHAR},
+      sa_grade = #{saGrade,jdbcType=INTEGER}
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </update>
+</mapper>

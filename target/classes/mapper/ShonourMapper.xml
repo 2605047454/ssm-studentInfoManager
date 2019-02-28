@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.ShonourMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Shonour">
+    <id column="sh_id" jdbcType="INTEGER" property="shId" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="sh_name" jdbcType="VARCHAR" property="shName" />
+    <result column="sh_tiem" jdbcType="VARCHAR" property="shTiem" />
+    <result column="sh_descript" jdbcType="VARCHAR" property="shDescript" />
+    <result column="sh_recordtime" jdbcType="VARCHAR" property="shRecordtime" />
+    <result column="sh_lasttime" jdbcType="VARCHAR" property="shLasttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sh_id, s_number, sh_name, sh_tiem, sh_descript, sh_recordtime, sh_lasttime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.ShonourExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_honour
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_honour
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_honour
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.ShonourExample">
+    delete from s_honour
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Shonour">
+    insert into s_honour (sh_id, s_number, sh_name, 
+      sh_tiem, sh_descript, sh_recordtime, 
+      sh_lasttime)
+    values (#{shId,jdbcType=INTEGER}, #{sNumber,jdbcType=INTEGER}, #{shName,jdbcType=VARCHAR}, 
+      #{shTiem,jdbcType=VARCHAR}, #{shDescript,jdbcType=VARCHAR}, #{shRecordtime,jdbcType=VARCHAR}, 
+      #{shLasttime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Shonour">
+    insert into s_honour
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shId != null">
+        sh_id,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="shName != null">
+        sh_name,
+      </if>
+      <if test="shTiem != null">
+        sh_tiem,
+      </if>
+      <if test="shDescript != null">
+        sh_descript,
+      </if>
+      <if test="shRecordtime != null">
+        sh_recordtime,
+      </if>
+      <if test="shLasttime != null">
+        sh_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shId != null">
+        #{shId,jdbcType=INTEGER},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="shName != null">
+        #{shName,jdbcType=VARCHAR},
+      </if>
+      <if test="shTiem != null">
+        #{shTiem,jdbcType=VARCHAR},
+      </if>
+      <if test="shDescript != null">
+        #{shDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="shRecordtime != null">
+        #{shRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="shLasttime != null">
+        #{shLasttime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.ShonourExample" resultType="java.lang.Long">
+    select count(*) from s_honour
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_honour
+    <set>
+      <if test="record.shId != null">
+        sh_id = #{record.shId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sNumber != null">
+        s_number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.shName != null">
+        sh_name = #{record.shName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shTiem != null">
+        sh_tiem = #{record.shTiem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shDescript != null">
+        sh_descript = #{record.shDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shRecordtime != null">
+        sh_recordtime = #{record.shRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shLasttime != null">
+        sh_lasttime = #{record.shLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_honour
+    set sh_id = #{record.shId,jdbcType=INTEGER},
+      s_number = #{record.sNumber,jdbcType=INTEGER},
+      sh_name = #{record.shName,jdbcType=VARCHAR},
+      sh_tiem = #{record.shTiem,jdbcType=VARCHAR},
+      sh_descript = #{record.shDescript,jdbcType=VARCHAR},
+      sh_recordtime = #{record.shRecordtime,jdbcType=VARCHAR},
+      sh_lasttime = #{record.shLasttime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Shonour">
+    update s_honour
+    <set>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="shName != null">
+        sh_name = #{shName,jdbcType=VARCHAR},
+      </if>
+      <if test="shTiem != null">
+        sh_tiem = #{shTiem,jdbcType=VARCHAR},
+      </if>
+      <if test="shDescript != null">
+        sh_descript = #{shDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="shRecordtime != null">
+        sh_recordtime = #{shRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="shLasttime != null">
+        sh_lasttime = #{shLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Shonour">
+    update s_honour
+    set s_number = #{sNumber,jdbcType=INTEGER},
+      sh_name = #{shName,jdbcType=VARCHAR},
+      sh_tiem = #{shTiem,jdbcType=VARCHAR},
+      sh_descript = #{shDescript,jdbcType=VARCHAR},
+      sh_recordtime = #{shRecordtime,jdbcType=VARCHAR},
+      sh_lasttime = #{shLasttime,jdbcType=VARCHAR}
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </update>
+</mapper>

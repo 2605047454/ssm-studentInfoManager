@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.SchargeMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Scharge">
+    <id column="sc_id" jdbcType="INTEGER" property="scId" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="sc_house" jdbcType="INTEGER" property="scHouse" />
+    <result column="sc_learn" jdbcType="INTEGER" property="scLearn" />
+    <result column="sc_class" jdbcType="INTEGER" property="scClass" />
+    <result column="sc_water" jdbcType="INTEGER" property="scWater" />
+    <result column="sc_military" jdbcType="INTEGER" property="scMilitary" />
+    <result column="sc_other" jdbcType="VARCHAR" property="scOther" />
+    <result column="sc_status" jdbcType="INTEGER" property="scStatus" />
+    <result column="sc_recordtime" jdbcType="VARCHAR" property="scRecordtime" />
+    <result column="sc_lasttime" jdbcType="VARCHAR" property="scLasttime" />
+    <result column="sc_degree" jdbcType="INTEGER" property="scDegree" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sc_id, s_number, sc_house, sc_learn, sc_class, sc_water, sc_military, sc_other, sc_status, 
+    sc_recordtime, sc_lasttime, sc_degree
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.SchargeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_charge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_charge
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_charge
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.SchargeExample">
+    delete from s_charge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Scharge">
+    insert into s_charge (sc_id, s_number, sc_house, 
+      sc_learn, sc_class, sc_water, 
+      sc_military, sc_other, sc_status, 
+      sc_recordtime, sc_lasttime, sc_degree
+      )
+    values (#{scId,jdbcType=INTEGER}, #{sNumber,jdbcType=INTEGER}, #{scHouse,jdbcType=INTEGER}, 
+      #{scLearn,jdbcType=INTEGER}, #{scClass,jdbcType=INTEGER}, #{scWater,jdbcType=INTEGER}, 
+      #{scMilitary,jdbcType=INTEGER}, #{scOther,jdbcType=VARCHAR}, #{scStatus,jdbcType=INTEGER}, 
+      #{scRecordtime,jdbcType=VARCHAR}, #{scLasttime,jdbcType=VARCHAR}, #{scDegree,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Scharge">
+    insert into s_charge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scId != null">
+        sc_id,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="scHouse != null">
+        sc_house,
+      </if>
+      <if test="scLearn != null">
+        sc_learn,
+      </if>
+      <if test="scClass != null">
+        sc_class,
+      </if>
+      <if test="scWater != null">
+        sc_water,
+      </if>
+      <if test="scMilitary != null">
+        sc_military,
+      </if>
+      <if test="scOther != null">
+        sc_other,
+      </if>
+      <if test="scStatus != null">
+        sc_status,
+      </if>
+      <if test="scRecordtime != null">
+        sc_recordtime,
+      </if>
+      <if test="scLasttime != null">
+        sc_lasttime,
+      </if>
+      <if test="scDegree != null">
+        sc_degree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scId != null">
+        #{scId,jdbcType=INTEGER},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="scHouse != null">
+        #{scHouse,jdbcType=INTEGER},
+      </if>
+      <if test="scLearn != null">
+        #{scLearn,jdbcType=INTEGER},
+      </if>
+      <if test="scClass != null">
+        #{scClass,jdbcType=INTEGER},
+      </if>
+      <if test="scWater != null">
+        #{scWater,jdbcType=INTEGER},
+      </if>
+      <if test="scMilitary != null">
+        #{scMilitary,jdbcType=INTEGER},
+      </if>
+      <if test="scOther != null">
+        #{scOther,jdbcType=VARCHAR},
+      </if>
+      <if test="scStatus != null">
+        #{scStatus,jdbcType=INTEGER},
+      </if>
+      <if test="scRecordtime != null">
+        #{scRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="scLasttime != null">
+        #{scLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="scDegree != null">
+        #{scDegree,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.SchargeExample" resultType="java.lang.Long">
+    select count(*) from s_charge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_charge
+    <set>
+      <if test="record.scId != null">
+        sc_id = #{record.scId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sNumber != null">
+        s_number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.scHouse != null">
+        sc_house = #{record.scHouse,jdbcType=INTEGER},
+      </if>
+      <if test="record.scLearn != null">
+        sc_learn = #{record.scLearn,jdbcType=INTEGER},
+      </if>
+      <if test="record.scClass != null">
+        sc_class = #{record.scClass,jdbcType=INTEGER},
+      </if>
+      <if test="record.scWater != null">
+        sc_water = #{record.scWater,jdbcType=INTEGER},
+      </if>
+      <if test="record.scMilitary != null">
+        sc_military = #{record.scMilitary,jdbcType=INTEGER},
+      </if>
+      <if test="record.scOther != null">
+        sc_other = #{record.scOther,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scStatus != null">
+        sc_status = #{record.scStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.scRecordtime != null">
+        sc_recordtime = #{record.scRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scLasttime != null">
+        sc_lasttime = #{record.scLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scDegree != null">
+        sc_degree = #{record.scDegree,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_charge
+    set sc_id = #{record.scId,jdbcType=INTEGER},
+      s_number = #{record.sNumber,jdbcType=INTEGER},
+      sc_house = #{record.scHouse,jdbcType=INTEGER},
+      sc_learn = #{record.scLearn,jdbcType=INTEGER},
+      sc_class = #{record.scClass,jdbcType=INTEGER},
+      sc_water = #{record.scWater,jdbcType=INTEGER},
+      sc_military = #{record.scMilitary,jdbcType=INTEGER},
+      sc_other = #{record.scOther,jdbcType=VARCHAR},
+      sc_status = #{record.scStatus,jdbcType=INTEGER},
+      sc_recordtime = #{record.scRecordtime,jdbcType=VARCHAR},
+      sc_lasttime = #{record.scLasttime,jdbcType=VARCHAR},
+      sc_degree = #{record.scDegree,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Scharge">
+    update s_charge
+    <set>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="scHouse != null">
+        sc_house = #{scHouse,jdbcType=INTEGER},
+      </if>
+      <if test="scLearn != null">
+        sc_learn = #{scLearn,jdbcType=INTEGER},
+      </if>
+      <if test="scClass != null">
+        sc_class = #{scClass,jdbcType=INTEGER},
+      </if>
+      <if test="scWater != null">
+        sc_water = #{scWater,jdbcType=INTEGER},
+      </if>
+      <if test="scMilitary != null">
+        sc_military = #{scMilitary,jdbcType=INTEGER},
+      </if>
+      <if test="scOther != null">
+        sc_other = #{scOther,jdbcType=VARCHAR},
+      </if>
+      <if test="scStatus != null">
+        sc_status = #{scStatus,jdbcType=INTEGER},
+      </if>
+      <if test="scRecordtime != null">
+        sc_recordtime = #{scRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="scLasttime != null">
+        sc_lasttime = #{scLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="scDegree != null">
+        sc_degree = #{scDegree,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Scharge">
+    update s_charge
+    set s_number = #{sNumber,jdbcType=INTEGER},
+      sc_house = #{scHouse,jdbcType=INTEGER},
+      sc_learn = #{scLearn,jdbcType=INTEGER},
+      sc_class = #{scClass,jdbcType=INTEGER},
+      sc_water = #{scWater,jdbcType=INTEGER},
+      sc_military = #{scMilitary,jdbcType=INTEGER},
+      sc_other = #{scOther,jdbcType=VARCHAR},
+      sc_status = #{scStatus,jdbcType=INTEGER},
+      sc_recordtime = #{scRecordtime,jdbcType=VARCHAR},
+      sc_lasttime = #{scLasttime,jdbcType=VARCHAR},
+      sc_degree = #{scDegree,jdbcType=INTEGER}
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+</mapper>

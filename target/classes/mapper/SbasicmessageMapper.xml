@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.SbasicmessageMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Sbasicmessage">
+    <id column="s_bid" jdbcType="INTEGER" property="sBid" />
+    <result column="s_name" jdbcType="VARCHAR" property="sName" />
+    <result column="s_sex" jdbcType="INTEGER" property="sSex" />
+    <result column="s_birthday" jdbcType="VARCHAR" property="sBirthday" />
+    <result column="s_addr" jdbcType="VARCHAR" property="sAddr" />
+    <result column="s_phone" jdbcType="VARCHAR" property="sPhone" />
+    <result column="s_qq" jdbcType="INTEGER" property="sQq" />
+    <result column="s_weixin" jdbcType="VARCHAR" property="sWeixin" />
+    <result column="s_fphone" jdbcType="VARCHAR" property="sFphone" />
+    <result column="s_fname" jdbcType="VARCHAR" property="sFname" />
+    <result column="s_idcard" jdbcType="VARCHAR" property="sIdcard" />
+    <result column="s_isspe" jdbcType="INTEGER" property="sIsspe" />
+    <result column="s_gschool" jdbcType="VARCHAR" property="sGschool" />
+    <result column="s_isfreshg" jdbcType="INTEGER" property="sIsfreshg" />
+    <result column="s_class" jdbcType="VARCHAR" property="sClass" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="s_indate" jdbcType="VARCHAR" property="sIndate" />
+    <result column="s_outdate" jdbcType="VARCHAR" property="sOutdate" />
+    <result column="s_profession" jdbcType="VARCHAR" property="sProfession" />
+    <result column="s_recordtime" jdbcType="VARCHAR" property="sRecordtime" />
+    <result column="s_lasttime" jdbcType="VARCHAR" property="sLasttime" />
+    <result column="s_status" jdbcType="INTEGER" property="sStatus" />
+    <result column="s_isdegree" jdbcType="INTEGER" property="sIsdegree" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    s_bid, s_name, s_sex, s_birthday, s_addr, s_phone, s_qq, s_weixin, s_fphone, s_fname, 
+    s_idcard, s_isspe, s_gschool, s_isfreshg, s_class, s_number, s_indate, s_outdate, 
+    s_profession, s_recordtime, s_lasttime, s_status, s_isdegree
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.SbasicmessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_basicmessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_basicmessage
+    where s_bid = #{sBid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_basicmessage
+    where s_bid = #{sBid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.SbasicmessageExample">
+    delete from s_basicmessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Sbasicmessage">
+    insert into s_basicmessage (s_bid, s_name, s_sex, 
+      s_birthday, s_addr, s_phone, 
+      s_qq, s_weixin, s_fphone, 
+      s_fname, s_idcard, s_isspe, 
+      s_gschool, s_isfreshg, s_class, 
+      s_number, s_indate, s_outdate, 
+      s_profession, s_recordtime, s_lasttime, 
+      s_status, s_isdegree)
+    values (#{sBid,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sSex,jdbcType=INTEGER}, 
+      #{sBirthday,jdbcType=VARCHAR}, #{sAddr,jdbcType=VARCHAR}, #{sPhone,jdbcType=VARCHAR}, 
+      #{sQq,jdbcType=INTEGER}, #{sWeixin,jdbcType=VARCHAR}, #{sFphone,jdbcType=VARCHAR}, 
+      #{sFname,jdbcType=VARCHAR}, #{sIdcard,jdbcType=VARCHAR}, #{sIsspe,jdbcType=INTEGER}, 
+      #{sGschool,jdbcType=VARCHAR}, #{sIsfreshg,jdbcType=INTEGER}, #{sClass,jdbcType=VARCHAR}, 
+      #{sNumber,jdbcType=INTEGER}, #{sIndate,jdbcType=VARCHAR}, #{sOutdate,jdbcType=VARCHAR}, 
+      #{sProfession,jdbcType=VARCHAR}, #{sRecordtime,jdbcType=VARCHAR}, #{sLasttime,jdbcType=VARCHAR}, 
+      #{sStatus,jdbcType=INTEGER}, #{sIsdegree,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Sbasicmessage">
+    insert into s_basicmessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sBid != null">
+        s_bid,
+      </if>
+      <if test="sName != null">
+        s_name,
+      </if>
+      <if test="sSex != null">
+        s_sex,
+      </if>
+      <if test="sBirthday != null">
+        s_birthday,
+      </if>
+      <if test="sAddr != null">
+        s_addr,
+      </if>
+      <if test="sPhone != null">
+        s_phone,
+      </if>
+      <if test="sQq != null">
+        s_qq,
+      </if>
+      <if test="sWeixin != null">
+        s_weixin,
+      </if>
+      <if test="sFphone != null">
+        s_fphone,
+      </if>
+      <if test="sFname != null">
+        s_fname,
+      </if>
+      <if test="sIdcard != null">
+        s_idcard,
+      </if>
+      <if test="sIsspe != null">
+        s_isspe,
+      </if>
+      <if test="sGschool != null">
+        s_gschool,
+      </if>
+      <if test="sIsfreshg != null">
+        s_isfreshg,
+      </if>
+      <if test="sClass != null">
+        s_class,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="sIndate != null">
+        s_indate,
+      </if>
+      <if test="sOutdate != null">
+        s_outdate,
+      </if>
+      <if test="sProfession != null">
+        s_profession,
+      </if>
+      <if test="sRecordtime != null">
+        s_recordtime,
+      </if>
+      <if test="sLasttime != null">
+        s_lasttime,
+      </if>
+      <if test="sStatus != null">
+        s_status,
+      </if>
+      <if test="sIsdegree != null">
+        s_isdegree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sBid != null">
+        #{sBid,jdbcType=INTEGER},
+      </if>
+      <if test="sName != null">
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null">
+        #{sSex,jdbcType=INTEGER},
+      </if>
+      <if test="sBirthday != null">
+        #{sBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sAddr != null">
+        #{sAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhone != null">
+        #{sPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sQq != null">
+        #{sQq,jdbcType=INTEGER},
+      </if>
+      <if test="sWeixin != null">
+        #{sWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="sFphone != null">
+        #{sFphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sFname != null">
+        #{sFname,jdbcType=VARCHAR},
+      </if>
+      <if test="sIdcard != null">
+        #{sIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="sIsspe != null">
+        #{sIsspe,jdbcType=INTEGER},
+      </if>
+      <if test="sGschool != null">
+        #{sGschool,jdbcType=VARCHAR},
+      </if>
+      <if test="sIsfreshg != null">
+        #{sIsfreshg,jdbcType=INTEGER},
+      </if>
+      <if test="sClass != null">
+        #{sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sIndate != null">
+        #{sIndate,jdbcType=VARCHAR},
+      </if>
+      <if test="sOutdate != null">
+        #{sOutdate,jdbcType=VARCHAR},
+      </if>
+      <if test="sProfession != null">
+        #{sProfession,jdbcType=VARCHAR},
+      </if>
+      <if test="sRecordtime != null">
+        #{sRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="sLasttime != null">
+        #{sLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="sStatus != null">
+        #{sStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sIsdegree != null">
+        #{sIsdegree,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.SbasicmessageExample" resultType="java.lang.Long">
+    select count(*) from s_basicmessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_basicmessage
+    <set>
+      <if test="record.sBid != null">
+        s_bid = #{record.sBid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sName != null">
+        s_name = #{record.sName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sSex != null">
+        s_sex = #{record.sSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.sBirthday != null">
+        s_birthday = #{record.sBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sAddr != null">
+        s_addr = #{record.sAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sPhone != null">
+        s_phone = #{record.sPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sQq != null">
+        s_qq = #{record.sQq,jdbcType=INTEGER},
+      </if>
+      <if test="record.sWeixin != null">
+        s_weixin = #{record.sWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sFphone != null">
+        s_fphone = #{record.sFphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sFname != null">
+        s_fname = #{record.sFname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sIdcard != null">
+        s_idcard = #{record.sIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sIsspe != null">
+        s_isspe = #{record.sIsspe,jdbcType=INTEGER},
+      </if>
+      <if test="record.sGschool != null">
+        s_gschool = #{record.sGschool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sIsfreshg != null">
+        s_isfreshg = #{record.sIsfreshg,jdbcType=INTEGER},
+      </if>
+      <if test="record.sClass != null">
+        s_class = #{record.sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sNumber != null">
+        s_number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.sIndate != null">
+        s_indate = #{record.sIndate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sOutdate != null">
+        s_outdate = #{record.sOutdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sProfession != null">
+        s_profession = #{record.sProfession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sRecordtime != null">
+        s_recordtime = #{record.sRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sLasttime != null">
+        s_lasttime = #{record.sLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sStatus != null">
+        s_status = #{record.sStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.sIsdegree != null">
+        s_isdegree = #{record.sIsdegree,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_basicmessage
+    set s_bid = #{record.sBid,jdbcType=INTEGER},
+      s_name = #{record.sName,jdbcType=VARCHAR},
+      s_sex = #{record.sSex,jdbcType=INTEGER},
+      s_birthday = #{record.sBirthday,jdbcType=VARCHAR},
+      s_addr = #{record.sAddr,jdbcType=VARCHAR},
+      s_phone = #{record.sPhone,jdbcType=VARCHAR},
+      s_qq = #{record.sQq,jdbcType=INTEGER},
+      s_weixin = #{record.sWeixin,jdbcType=VARCHAR},
+      s_fphone = #{record.sFphone,jdbcType=VARCHAR},
+      s_fname = #{record.sFname,jdbcType=VARCHAR},
+      s_idcard = #{record.sIdcard,jdbcType=VARCHAR},
+      s_isspe = #{record.sIsspe,jdbcType=INTEGER},
+      s_gschool = #{record.sGschool,jdbcType=VARCHAR},
+      s_isfreshg = #{record.sIsfreshg,jdbcType=INTEGER},
+      s_class = #{record.sClass,jdbcType=VARCHAR},
+      s_number = #{record.sNumber,jdbcType=INTEGER},
+      s_indate = #{record.sIndate,jdbcType=VARCHAR},
+      s_outdate = #{record.sOutdate,jdbcType=VARCHAR},
+      s_profession = #{record.sProfession,jdbcType=VARCHAR},
+      s_recordtime = #{record.sRecordtime,jdbcType=VARCHAR},
+      s_lasttime = #{record.sLasttime,jdbcType=VARCHAR},
+      s_status = #{record.sStatus,jdbcType=INTEGER},
+      s_isdegree = #{record.sIsdegree,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Sbasicmessage">
+    update s_basicmessage
+    <set>
+      <if test="sName != null">
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null">
+        s_sex = #{sSex,jdbcType=INTEGER},
+      </if>
+      <if test="sBirthday != null">
+        s_birthday = #{sBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sAddr != null">
+        s_addr = #{sAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhone != null">
+        s_phone = #{sPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sQq != null">
+        s_qq = #{sQq,jdbcType=INTEGER},
+      </if>
+      <if test="sWeixin != null">
+        s_weixin = #{sWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="sFphone != null">
+        s_fphone = #{sFphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sFname != null">
+        s_fname = #{sFname,jdbcType=VARCHAR},
+      </if>
+      <if test="sIdcard != null">
+        s_idcard = #{sIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="sIsspe != null">
+        s_isspe = #{sIsspe,jdbcType=INTEGER},
+      </if>
+      <if test="sGschool != null">
+        s_gschool = #{sGschool,jdbcType=VARCHAR},
+      </if>
+      <if test="sIsfreshg != null">
+        s_isfreshg = #{sIsfreshg,jdbcType=INTEGER},
+      </if>
+      <if test="sClass != null">
+        s_class = #{sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sIndate != null">
+        s_indate = #{sIndate,jdbcType=VARCHAR},
+      </if>
+      <if test="sOutdate != null">
+        s_outdate = #{sOutdate,jdbcType=VARCHAR},
+      </if>
+      <if test="sProfession != null">
+        s_profession = #{sProfession,jdbcType=VARCHAR},
+      </if>
+      <if test="sRecordtime != null">
+        s_recordtime = #{sRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="sLasttime != null">
+        s_lasttime = #{sLasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="sStatus != null">
+        s_status = #{sStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sIsdegree != null">
+        s_isdegree = #{sIsdegree,jdbcType=INTEGER},
+      </if>
+    </set>
+    where s_bid = #{sBid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Sbasicmessage">
+    update s_basicmessage
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_sex = #{sSex,jdbcType=INTEGER},
+      s_birthday = #{sBirthday,jdbcType=VARCHAR},
+      s_addr = #{sAddr,jdbcType=VARCHAR},
+      s_phone = #{sPhone,jdbcType=VARCHAR},
+      s_qq = #{sQq,jdbcType=INTEGER},
+      s_weixin = #{sWeixin,jdbcType=VARCHAR},
+      s_fphone = #{sFphone,jdbcType=VARCHAR},
+      s_fname = #{sFname,jdbcType=VARCHAR},
+      s_idcard = #{sIdcard,jdbcType=VARCHAR},
+      s_isspe = #{sIsspe,jdbcType=INTEGER},
+      s_gschool = #{sGschool,jdbcType=VARCHAR},
+      s_isfreshg = #{sIsfreshg,jdbcType=INTEGER},
+      s_class = #{sClass,jdbcType=VARCHAR},
+      s_number = #{sNumber,jdbcType=INTEGER},
+      s_indate = #{sIndate,jdbcType=VARCHAR},
+      s_outdate = #{sOutdate,jdbcType=VARCHAR},
+      s_profession = #{sProfession,jdbcType=VARCHAR},
+      s_recordtime = #{sRecordtime,jdbcType=VARCHAR},
+      s_lasttime = #{sLasttime,jdbcType=VARCHAR},
+      s_status = #{sStatus,jdbcType=INTEGER},
+      s_isdegree = #{sIsdegree,jdbcType=INTEGER}
+    where s_bid = #{sBid,jdbcType=INTEGER}
+  </update>
+</mapper>

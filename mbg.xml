@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<!-- 可要可不要，作用是去掉注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据源的四个配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/studentinfomanager"
+			userId="root" password="1234">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 实体类，targetPackage=“包名”，targetProject=“包路径” -->
+		<javaModelGenerator targetPackage="com.zhiyuan.frank.pojo"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<!-- mapper.xml文件 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.zhiyuan.frank.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 有几个表就复制几个，tableName=“表名”，domainObjectName=“实体类名称” -->
+		<table schema="DB2ADMIN" tableName="s_aattendance"
+			domainObjectName="Saattendance">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_badbehavior"
+			domainObjectName="Sbadbehavior">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_basicmessage"
+			domainObjectName="Sbasicmessage">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_charge" domainObjectName="Scharge">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_charge_launch"
+			domainObjectName="SchargElaunch">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_class" domainObjectName="Sclass">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_honour" domainObjectName="Shonour">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_login" domainObjectName="Slogin">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_performance"
+			domainObjectName="Sperformance">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_profession"
+			domainObjectName="Sprofession">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_reg" domainObjectName="Sreg">
+		</table>
+		<table schema="DB2ADMIN" tableName="s_work" domainObjectName="Swork">
+		</table>
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.SperformanceMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Sperformance">
+    <id column="sp_pid" jdbcType="INTEGER" property="spPid" />
+    <result column="sp_number" jdbcType="INTEGER" property="spNumber" />
+    <result column="sp_zh" jdbcType="INTEGER" property="spZh" />
+    <result column="sp_math" jdbcType="INTEGER" property="spMath" />
+    <result column="sp_en" jdbcType="INTEGER" property="spEn" />
+    <result column="sp_music" jdbcType="INTEGER" property="spMusic" />
+    <result column="sp_sport" jdbcType="INTEGER" property="spSport" />
+    <result column="sp_art" jdbcType="INTEGER" property="spArt" />
+    <result column="sp_profession" jdbcType="INTEGER" property="spProfession" />
+    <result column="sp_ptype" jdbcType="INTEGER" property="spPtype" />
+    <result column="sp_recordtime" jdbcType="VARCHAR" property="spRecordtime" />
+    <result column="sp_lasttime" jdbcType="VARCHAR" property="spLasttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sp_pid, sp_number, sp_zh, sp_math, sp_en, sp_music, sp_sport, sp_art, sp_profession, 
+    sp_ptype, sp_recordtime, sp_lasttime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.SperformanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_performance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_performance
+    where sp_pid = #{spPid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_performance
+    where sp_pid = #{spPid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.SperformanceExample">
+    delete from s_performance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Sperformance">
+    insert into s_performance (sp_pid, sp_number, sp_zh, 
+      sp_math, sp_en, sp_music, 
+      sp_sport, sp_art, sp_profession, 
+      sp_ptype, sp_recordtime, sp_lasttime
+      )
+    values (#{spPid,jdbcType=INTEGER}, #{spNumber,jdbcType=INTEGER}, #{spZh,jdbcType=INTEGER}, 
+      #{spMath,jdbcType=INTEGER}, #{spEn,jdbcType=INTEGER}, #{spMusic,jdbcType=INTEGER}, 
+      #{spSport,jdbcType=INTEGER}, #{spArt,jdbcType=INTEGER}, #{spProfession,jdbcType=INTEGER}, 
+      #{spPtype,jdbcType=INTEGER}, #{spRecordtime,jdbcType=VARCHAR}, #{spLasttime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Sperformance">
+    insert into s_performance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spPid != null">
+        sp_pid,
+      </if>
+      <if test="spNumber != null">
+        sp_number,
+      </if>
+      <if test="spZh != null">
+        sp_zh,
+      </if>
+      <if test="spMath != null">
+        sp_math,
+      </if>
+      <if test="spEn != null">
+        sp_en,
+      </if>
+      <if test="spMusic != null">
+        sp_music,
+      </if>
+      <if test="spSport != null">
+        sp_sport,
+      </if>
+      <if test="spArt != null">
+        sp_art,
+      </if>
+      <if test="spProfession != null">
+        sp_profession,
+      </if>
+      <if test="spPtype != null">
+        sp_ptype,
+      </if>
+      <if test="spRecordtime != null">
+        sp_recordtime,
+      </if>
+      <if test="spLasttime != null">
+        sp_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spPid != null">
+        #{spPid,jdbcType=INTEGER},
+      </if>
+      <if test="spNumber != null">
+        #{spNumber,jdbcType=INTEGER},
+      </if>
+      <if test="spZh != null">
+        #{spZh,jdbcType=INTEGER},
+      </if>
+      <if test="spMath != null">
+        #{spMath,jdbcType=INTEGER},
+      </if>
+      <if test="spEn != null">
+        #{spEn,jdbcType=INTEGER},
+      </if>
+      <if test="spMusic != null">
+        #{spMusic,jdbcType=INTEGER},
+      </if>
+      <if test="spSport != null">
+        #{spSport,jdbcType=INTEGER},
+      </if>
+      <if test="spArt != null">
+        #{spArt,jdbcType=INTEGER},
+      </if>
+      <if test="spProfession != null">
+        #{spProfession,jdbcType=INTEGER},
+      </if>
+      <if test="spPtype != null">
+        #{spPtype,jdbcType=INTEGER},
+      </if>
+      <if test="spRecordtime != null">
+        #{spRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="spLasttime != null">
+        #{spLasttime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.SperformanceExample" resultType="java.lang.Long">
+    select count(*) from s_performance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_performance
+    <set>
+      <if test="record.spPid != null">
+        sp_pid = #{record.spPid,jdbcType=INTEGER},
+      </if>
+      <if test="record.spNumber != null">
+        sp_number = #{record.spNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.spZh != null">
+        sp_zh = #{record.spZh,jdbcType=INTEGER},
+      </if>
+      <if test="record.spMath != null">
+        sp_math = #{record.spMath,jdbcType=INTEGER},
+      </if>
+      <if test="record.spEn != null">
+        sp_en = #{record.spEn,jdbcType=INTEGER},
+      </if>
+      <if test="record.spMusic != null">
+        sp_music = #{record.spMusic,jdbcType=INTEGER},
+      </if>
+      <if test="record.spSport != null">
+        sp_sport = #{record.spSport,jdbcType=INTEGER},
+      </if>
+      <if test="record.spArt != null">
+        sp_art = #{record.spArt,jdbcType=INTEGER},
+      </if>
+      <if test="record.spProfession != null">
+        sp_profession = #{record.spProfession,jdbcType=INTEGER},
+      </if>
+      <if test="record.spPtype != null">
+        sp_ptype = #{record.spPtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.spRecordtime != null">
+        sp_recordtime = #{record.spRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spLasttime != null">
+        sp_lasttime = #{record.spLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_performance
+    set sp_pid = #{record.spPid,jdbcType=INTEGER},
+      sp_number = #{record.spNumber,jdbcType=INTEGER},
+      sp_zh = #{record.spZh,jdbcType=INTEGER},
+      sp_math = #{record.spMath,jdbcType=INTEGER},
+      sp_en = #{record.spEn,jdbcType=INTEGER},
+      sp_music = #{record.spMusic,jdbcType=INTEGER},
+      sp_sport = #{record.spSport,jdbcType=INTEGER},
+      sp_art = #{record.spArt,jdbcType=INTEGER},
+      sp_profession = #{record.spProfession,jdbcType=INTEGER},
+      sp_ptype = #{record.spPtype,jdbcType=INTEGER},
+      sp_recordtime = #{record.spRecordtime,jdbcType=VARCHAR},
+      sp_lasttime = #{record.spLasttime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Sperformance">
+    update s_performance
+    <set>
+      <if test="spNumber != null">
+        sp_number = #{spNumber,jdbcType=INTEGER},
+      </if>
+      <if test="spZh != null">
+        sp_zh = #{spZh,jdbcType=INTEGER},
+      </if>
+      <if test="spMath != null">
+        sp_math = #{spMath,jdbcType=INTEGER},
+      </if>
+      <if test="spEn != null">
+        sp_en = #{spEn,jdbcType=INTEGER},
+      </if>
+      <if test="spMusic != null">
+        sp_music = #{spMusic,jdbcType=INTEGER},
+      </if>
+      <if test="spSport != null">
+        sp_sport = #{spSport,jdbcType=INTEGER},
+      </if>
+      <if test="spArt != null">
+        sp_art = #{spArt,jdbcType=INTEGER},
+      </if>
+      <if test="spProfession != null">
+        sp_profession = #{spProfession,jdbcType=INTEGER},
+      </if>
+      <if test="spPtype != null">
+        sp_ptype = #{spPtype,jdbcType=INTEGER},
+      </if>
+      <if test="spRecordtime != null">
+        sp_recordtime = #{spRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="spLasttime != null">
+        sp_lasttime = #{spLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sp_pid = #{spPid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Sperformance">
+    update s_performance
+    set sp_number = #{spNumber,jdbcType=INTEGER},
+      sp_zh = #{spZh,jdbcType=INTEGER},
+      sp_math = #{spMath,jdbcType=INTEGER},
+      sp_en = #{spEn,jdbcType=INTEGER},
+      sp_music = #{spMusic,jdbcType=INTEGER},
+      sp_sport = #{spSport,jdbcType=INTEGER},
+      sp_art = #{spArt,jdbcType=INTEGER},
+      sp_profession = #{spProfession,jdbcType=INTEGER},
+      sp_ptype = #{spPtype,jdbcType=INTEGER},
+      sp_recordtime = #{spRecordtime,jdbcType=VARCHAR},
+      sp_lasttime = #{spLasttime,jdbcType=VARCHAR}
+    where sp_pid = #{spPid,jdbcType=INTEGER}
+  </update>
+</mapper>

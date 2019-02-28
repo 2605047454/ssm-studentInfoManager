@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyuan.frank.dao.SworkMapper">
+  <resultMap id="BaseResultMap" type="com.zhiyuan.frank.pojo.Swork">
+    <id column="sw_id" jdbcType="INTEGER" property="swId" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="sw_type" jdbcType="VARCHAR" property="swType" />
+    <result column="sw_status" jdbcType="INTEGER" property="swStatus" />
+    <result column="sw_approval" jdbcType="VARCHAR" property="swApproval" />
+    <result column="sw_recordtime" jdbcType="VARCHAR" property="swRecordtime" />
+    <result column="sw_lasttime" jdbcType="VARCHAR" property="swLasttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sw_id, s_number, sw_type, sw_status, sw_approval, sw_recordtime, sw_lasttime
+  </sql>
+  <select id="selectByExample" parameterType="com.zhiyuan.frank.pojo.SworkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_work
+    where sw_id = #{swId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_work
+    where sw_id = #{swId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhiyuan.frank.pojo.SworkExample">
+    delete from s_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhiyuan.frank.pojo.Swork">
+    insert into s_work (sw_id, s_number, sw_type, 
+      sw_status, sw_approval, sw_recordtime, 
+      sw_lasttime)
+    values (#{swId,jdbcType=INTEGER}, #{sNumber,jdbcType=INTEGER}, #{swType,jdbcType=VARCHAR}, 
+      #{swStatus,jdbcType=INTEGER}, #{swApproval,jdbcType=VARCHAR}, #{swRecordtime,jdbcType=VARCHAR}, 
+      #{swLasttime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhiyuan.frank.pojo.Swork">
+    insert into s_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="swId != null">
+        sw_id,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="swType != null">
+        sw_type,
+      </if>
+      <if test="swStatus != null">
+        sw_status,
+      </if>
+      <if test="swApproval != null">
+        sw_approval,
+      </if>
+      <if test="swRecordtime != null">
+        sw_recordtime,
+      </if>
+      <if test="swLasttime != null">
+        sw_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="swId != null">
+        #{swId,jdbcType=INTEGER},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="swType != null">
+        #{swType,jdbcType=VARCHAR},
+      </if>
+      <if test="swStatus != null">
+        #{swStatus,jdbcType=INTEGER},
+      </if>
+      <if test="swApproval != null">
+        #{swApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="swRecordtime != null">
+        #{swRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="swLasttime != null">
+        #{swLasttime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhiyuan.frank.pojo.SworkExample" resultType="java.lang.Long">
+    select count(*) from s_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update s_work
+    <set>
+      <if test="record.swId != null">
+        sw_id = #{record.swId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sNumber != null">
+        s_number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.swType != null">
+        sw_type = #{record.swType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swStatus != null">
+        sw_status = #{record.swStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.swApproval != null">
+        sw_approval = #{record.swApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swRecordtime != null">
+        sw_recordtime = #{record.swRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swLasttime != null">
+        sw_lasttime = #{record.swLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update s_work
+    set sw_id = #{record.swId,jdbcType=INTEGER},
+      s_number = #{record.sNumber,jdbcType=INTEGER},
+      sw_type = #{record.swType,jdbcType=VARCHAR},
+      sw_status = #{record.swStatus,jdbcType=INTEGER},
+      sw_approval = #{record.swApproval,jdbcType=VARCHAR},
+      sw_recordtime = #{record.swRecordtime,jdbcType=VARCHAR},
+      sw_lasttime = #{record.swLasttime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhiyuan.frank.pojo.Swork">
+    update s_work
+    <set>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="swType != null">
+        sw_type = #{swType,jdbcType=VARCHAR},
+      </if>
+      <if test="swStatus != null">
+        sw_status = #{swStatus,jdbcType=INTEGER},
+      </if>
+      <if test="swApproval != null">
+        sw_approval = #{swApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="swRecordtime != null">
+        sw_recordtime = #{swRecordtime,jdbcType=VARCHAR},
+      </if>
+      <if test="swLasttime != null">
+        sw_lasttime = #{swLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sw_id = #{swId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhiyuan.frank.pojo.Swork">
+    update s_work
+    set s_number = #{sNumber,jdbcType=INTEGER},
+      sw_type = #{swType,jdbcType=VARCHAR},
+      sw_status = #{swStatus,jdbcType=INTEGER},
+      sw_approval = #{swApproval,jdbcType=VARCHAR},
+      sw_recordtime = #{swRecordtime,jdbcType=VARCHAR},
+      sw_lasttime = #{swLasttime,jdbcType=VARCHAR}
+    where sw_id = #{swId,jdbcType=INTEGER}
+  </update>
+</mapper>
